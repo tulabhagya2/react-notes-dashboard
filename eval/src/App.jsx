@@ -1,10 +1,10 @@
 import { React } from "react";
 import { useState, useEffect, useMemo } from "react";
 
-import { NotesContext } from "./context/NotesContext";
+import { NotesContext, NotesProvider } from "./context/NotesContext";
 import AddNote from "./components/AddNote";
 import NotesList from "./components/NotesList";
-function App() {
+function Dashboard() {
   const [notes, setNotes] = useState([]);
   const [selectedNote, setSelectedNote] = useState(null);
   useEffect(() => {
@@ -17,21 +17,28 @@ function App() {
     localStorage.setItem("notes", JSON.stringify(notes));
   }, [notes]
   );
-  const totalNotes = useMemo(() => {
-    return notes.length;
-  }, [notes]);
-  return (
-    <NotesContext.Provider value={{ notes, setNotes, selectedNote, setSelectedNote }}>
-      <div>
-        <h1>notes Dashboard</h1>
-        <AddNote />
-        <h3>Total Notes:{totalNotes}</h3>
-        <NotesList />
-      </div>
 
-    </NotesContext.Provider>
+  const totalNotes = useMemo(() => notes.length, [notes]);
+  return (
+
+    <div style={{ padding: "20px" }}>
+      <h1>notes Dashboard</h1>
+      <AddNote />
+      <h3>Total Notes:{totalNotes}</h3>
+      <NotesList />
+    </div>
+
+
   )
 
 };
+function App() {
+  return (
+    <NotesProvider>
+      <Dashboard />
+    </NotesProvider>
+  )
+
+}
 
 export default App;
