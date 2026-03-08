@@ -21,7 +21,7 @@ function App() {
     return notes.length;
   }, [notes]);
   return (
-    <NotesContext.Provider value={{ notes, setNotes, selectedNote }}>
+    <NotesContext.Provider value={{ notes, setNotes, selectedNote, setSelectedNote }}>
       <div>
         <h1>notes Dashboard</h1>
         <AddNote />
