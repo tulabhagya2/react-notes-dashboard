@@ -1,7 +1,7 @@
 import { React } from "react";
 import { useState, useContext, useRef, useEffect } from "react";
 import { NotesContext } from "../context/NotesContext";
-import { use } from "react";
+
 function AddNote() {
     const { notes, setNotes } = useContext(NotesContext);
     const [input, setInput] = useState("");
